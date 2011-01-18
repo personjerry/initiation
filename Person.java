@@ -12,13 +12,14 @@ public class Person {
     wg=new WordGen();
     name=wg.fCap(wg.format(wg.ss(root.rand.random()%2+2)));
     task="Nothing";
+    age=20;
     if(root.rand.random()%2==0)
       male=true;
     else
       male=false;
     attr_str=root.rand.random()%10+1;
     //attr_int=root.rand.random()%10+1;
-    attr_int=15-attr_str; //so that you don't get overly powerful, or weak characters
+    attr_int=11-attr_str; //so that you don't get overly powerful, or weak characters
   }
   public void details() {
     root.d.out("Name: "+name);
