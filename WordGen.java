@@ -3,14 +3,13 @@
  * Each syllable is either: cvc,cv, or vc
  */
 
-//Please update the random functions of WordGen to use MT.java
-
 public class WordGen {
  static int C=1;
  static int V=2;
+ MT mt;
  
  WordGen() {
-  
+   mt=new MT();
  }
  
  public String s() {
@@ -47,7 +46,7 @@ public class WordGen {
  }
  
  public int rand(int min,int max) {
-  return (int)Math.floor(Math.random()*(max-min+1))+min;
+  return (mt.random()%(max-min+1)+min);
  }
  
  public String format(String s) {
@@ -89,7 +88,7 @@ public class WordGen {
   return s;
  }
  
- public int type(String s) {
+ public static int type(String s) {
   s=s.substring(0,1);
   if(s.equals("a")||s.equals("e")||s.equals("i")||s.equals("o")||s.equals("u")) {
    return V;
@@ -97,7 +96,7 @@ public class WordGen {
    return C;
   }
  }
- public String fCap(String s) {
+ public static String fCap(String s) {
   String fLetter=s.substring(0,1);
   String oLetters=s.substring(1);
   s=fLetter.toUpperCase()+oLetters.toLowerCase();

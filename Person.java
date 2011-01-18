@@ -19,7 +19,7 @@ public class Person {
     this.male=male;
     
     wg=new WordGen();
-    name=wg.fCap(wg.format(wg.ss(root.rand.random()%2+2)));
+    name=WordGen.fCap(wg.format(wg.ss(root.rand.random()%2+2)));
     
     task="Nothing";
     
