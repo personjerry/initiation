@@ -17,17 +17,18 @@ public class Person {
     else
       male=false;
     attr_str=root.rand.random()%10+1;
-    attr_int=root.rand.random()%10+1;
+    //attr_int=root.rand.random()%10+1;
+    attr_int=15-attr_str; //so that you don't get overly powerful, or weak characters
   }
   public void details() {
-    root.d.out(name);
-    root.d.out(task);
+    root.d.out("Name: "+name);
+    root.d.out("Task: "+task);
     if(male)
       root.d.out("Male");
     else
       root.d.out("Female");
-    root.d.out(age);
-    root.d.out(attr_str);
-    root.d.out(attr_int);
+    root.d.out("Age: "+age);
+    root.d.out("Strength: "+attr_str);
+    root.d.out("Intelligence: "+attr_int);
   }
 }
