@@ -1,8 +1,16 @@
 import java.util.*;
+import java.io.*;
+
 public class Initiation {
   Display d;
   MT rand;
-  Vector<Person> people;
+  SaveFile s;
+  
+   //File Handling
+  FileOutputStream fos;
+  ObjectOutputStream out;
+  FileInputStream fis;
+  ObjectInputStream in;
   
   public static void main(String[] args) {
     new Initiation();
@@ -10,35 +18,62 @@ public class Initiation {
   Initiation() {
     d=new Display();
     rand=new MT();
-    
-    //add some people
-    people=new Vector<Person>();
-    addPerson(new Person(this,true));
-    addPerson(new Person(this,false));
+    String user_input=d.nextLine();
+    if(user_input.equals("new")) {
+      create();
+      save("save.dat");
+      d.out("File successfully created.");
+    } else {
+      if(load("save.dat")) {
+        d.out("Load successful.");
+      } else {
+        d.out("Make a save file first.");
+      }
+    }
     
     d.out("Welcome to Initiation.");
     d.out("//insert storyline here");
-    for(int i=0;i<people.size();i++) {
-      Person p=(Person)people.get(i);
+    for(int i=0;i<s.people.size();i++) {
+      Person p=(Person)s.people.get(i);
       p.details();
-      if(i!=people.size()-1)
+      if(i!=s.people.size()-1)
         d.out("-----------------------");
     }
   }
-  private void addPerson(Person p) {
-    people.add(p);
+  void create() {
+    s=new SaveFile(this);
   }
-  private int getPerson(String name) {
-    name=WordGen.fCap(name);
-    for(int i=0;i<people.size();i++) {
-      Person p=(Person)people.get(i);
-      if(p.name.equals(name)) {
-        return i;
+  boolean load(String fn) {
+    try {
+      fis = new FileInputStream(fn);
+      in = new ObjectInputStream(fis);
+      s = (SaveFile)in.readObject();
+      in.close();
+      
+      //call load functions of loaded classes (because root isn't stored)
+      for(int i=0;i<s.people.size();i++) {
+        Person p=(Person)s.people.get(i);
+        p.load(this);
       }
+      s.village.load(this);
+      
+      return true;
+    } catch(IOException ex) {
+      //ex.printStackTrace();
+      return false;
+    } catch (ClassNotFoundException ex) {
+      //ex.printStackTrace();
+      return false;
     }
-    return 0;
   }
-  private void removePerson(int i) {
-    people.remove(i);
+  void save(String fn) {
+    try {
+      fos=new FileOutputStream(fn);
+      out=new ObjectOutputStream(fos);
+      out.writeObject(s);
+      out.close();
+    } catch(IOException ex) {
+      ex.printStackTrace();
+    }
   }
 }

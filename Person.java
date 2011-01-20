@@ -1,14 +1,17 @@
-public class Person {
-  Initiation root;
+import java.io.*;
+
+public class Person implements Serializable {
+  transient Initiation root;
+  transient WordGen wg;
+  
   public String name;
   public String task;
   public boolean male;
   public int age;
   public int attr_str;
   public int attr_int;
-  WordGen wg;
   public Person(Initiation root) { 
-    this(root,true);
+    this(root,root.rand.random()%2==0);
     /*if(root.rand.random()%2==0)
       male=true;
     else
@@ -38,5 +41,9 @@ public class Person {
     root.d.out("Age: "+age);
     root.d.out("Strength: "+attr_str);
     root.d.out("Intelligence: "+attr_int);
+  }
+  public void load(Initiation root) {
+    this.root=root;
+    wg=new WordGen();
   }
 }
