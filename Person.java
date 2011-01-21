@@ -5,7 +5,7 @@ public class Person implements Serializable {
   transient WordGen wg;
   
   public String name;
-  public String task;
+  public int task;
   public boolean male;
   public int age;
   public int attr_str;
@@ -24,7 +24,7 @@ public class Person implements Serializable {
     wg=new WordGen();
     name=WordGen.fCap(wg.format(wg.ss(root.rand.random()%2+2)));
     
-    task="Nothing";
+    task=0; //Nothing
     
     age=20;
     attr_str=root.rand.random()%10+1;
@@ -33,7 +33,7 @@ public class Person implements Serializable {
   }
   public void details() {
     root.d.out("Name: "+name);
-    root.d.out("Task: "+task);
+    root.d.out("Task: "+getTaskName(task));
     if(male)
       root.d.out("Male");
     else
@@ -45,5 +45,22 @@ public class Person implements Serializable {
   public void load(Initiation root) {
     this.root=root;
     wg=new WordGen();
+  }
+  public String getTaskName(int i) {
+    switch(i) {
+      case 0:
+        return "Nothing";
+      case 1:
+        return "Farming";
+      case 2:
+        return "Building";
+      case 3:
+        return "Resting";
+      case 4:
+        return "Mining";
+      case 5:
+        return "Getting Wood"; //heh heh
+    }
+    return null;
   }
 }
