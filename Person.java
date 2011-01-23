@@ -46,7 +46,7 @@ public class Person implements Serializable {
     this.root=root;
     wg=new WordGen();
   }
-  public String getTaskName(int i) {
+  public static String getTaskName(int i) {
     switch(i) {
       case 0:
         return "Nothing";
@@ -62,5 +62,8 @@ public class Person implements Serializable {
         return "Getting Wood"; //heh heh
     }
     return null;
+  }
+  public void setTask(int i) {
+    task=i;
   }
 }

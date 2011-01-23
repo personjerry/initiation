@@ -13,10 +13,10 @@ public class SaveFile implements Serializable {
     //make the village
     village=new Village(root);
   }
-  private void addPerson(Person p) {
+  public void addPerson(Person p) {
     people.add(p);
   }
-  private int getPerson(String name) {
+  public int getPerson(String name) {
     name=WordGen.fCap(name);
     for(int i=0;i<people.size();i++) {
       Person p=(Person)people.get(i);
@@ -24,9 +24,9 @@ public class SaveFile implements Serializable {
         return i;
       }
     }
-    return 0;
+    return -1;
   }
-  private void removePerson(int i) {
+  public void removePerson(int i) {
     people.remove(i);
   }
 }
