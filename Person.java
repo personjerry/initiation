@@ -32,15 +32,15 @@ public class Person implements Serializable {
     //attr_int=11-attr_str; //so that you don't get overly powerful, or weak characters -> However in real life there are people who are completely useless.
   }
   public void details() {
-    root.d.out("Name: "+name);
-    root.d.out("Task: "+getTaskName(task));
+    root.io.out("Name: "+name);
+    root.io.out("Task: "+getTaskName(task));
     if(male)
-      root.d.out("Male");
+      root.io.out("Male");
     else
-      root.d.out("Female");
-    root.d.out("Age: "+age);
-    root.d.out("Strength: "+attr_str);
-    root.d.out("Intelligence: "+attr_int);
+      root.io.out("Female");
+    root.io.out("Age: "+age);
+    root.io.out("Strength: "+attr_str);
+    root.io.out("Intelligence: "+attr_int);
   }
   public void load(Initiation root) {
     this.root=root;

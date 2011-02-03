@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Initiation {
-  Display d;
+  Interface io;
   MT rand;
   SaveFile s;
   
@@ -19,64 +19,67 @@ public class Initiation {
     new Initiation();
   }
   Initiation() {
-    d=new Display();
+    io=new Interface();
     rand=new MT();
-    
-    d.out("Would you like to create a new file, or load one? (new/load)");
-    String user_input=d.nextLine();
+    while(true){
+    io.out("Would you like to create a new file, or load one? (new/load)");
+    String user_input=io.nextLine();
+    io.out("");
     if(user_input.equals("new")) {
       create();
       save("save.dat");
-      d.out("File successfully created.");
+      io.out("File successfully created.");
+	    break;
     } else {
       if(load("save.dat")) {
-        d.out("Load successful.");
+        io.out("Load successful.");
+	      break;
       } else {
-        d.out("Save file not found or corrupted. A new one has been created.");
-        create();
+        io.out("Save file not found or corrupted.");
       }
     }
+    }
     
-    d.out("Welcome to Initiation.");
-    d.out("//insert storyline here");
+    io.out("Welcome to Initiation.");
+    io.out("//insert storyline here");
     for(int i=0;i<s.people.size();i++) {
       Person p=(Person)s.people.get(i);
       p.details();
       if(i!=s.people.size()-1)
-        d.out("-----------------------");
+        io.out("-----------------------");
     }
     boolean exit=false;
     while(!exit) {
-      String c=d.nextLine();
+      String c=io.nextLine();
       c=c.toLowerCase();
       String[] command=c.split(" ");
       
       if(command[0].equals("help")) {
         if(command.length==1) {
-          d.out("Commands:");
-          d.out("settask [person] [task]-assigns the task to the person");
-          d.out("day-a day goes by; your people do their tasks");
-          d.out("resources-displays a list of resources you have");
-          d.out("help [command]-shows help for that command");
-          d.out("exit-exits; how stupid are you?");
+          io.out("Commands:");
+          io.out("settask [person] [task]-assigns the task to the person");
+          io.out("day-a day goes by; your people do their tasks");
+          io.out("resources-displays a list of resources you have");
+          io.out("help [command]-shows help for that command");
+          io.out("exit-exits; how stupid are you?");
         } else if(command[1].equals("help")) {
-          d.out("you're asking how to use a command that you just used");
+          io.out("you're asking how to use a command that you just used");
         } else if(command[1].equals("tasks")) {
-          d.out("not yet implemented, check back later");
+          io.out("not yet implemented, check back later");
         } else if(command[1].equals("day")) {
-          d.out("not yet implemented, check back later");
+          io.out("not yet implemented, check back later");
         } else if(command[1].equals("resources")) {
-          d.out("displays a list of collected resources");
+          io.out("displays a list of collected resources");
         } else if(command[1].equals("exit")) {
-          d.out("it exits");
+          io.out("it exits");
         }
       } else if(command[0].equals("exit")) {
         exit=true;
       } else if(command[0].equals("resources")) {
-        d.out("Resources:");
-        d.out("Food: "+s.village.food);
-        d.out("Wood: "+s.village.wood);
-        d.out("Stone: "+s.village.stone);
+        io.out("Resources:");
+        io.out("Food: "+s.village.food);
+        io.out("Wood: "+s.village.wood);
+        io.out("Stone: "+s.village.stone);
       } else if(command[0].equals("settask")) {
         if(command.length==3) {
           //get the person's id
@@ -90,16 +93,16 @@ public class Initiation {
               }
             }
             if(task==-1) {
-              d.out("Task is not valid. Setting task to 'Nothing'.");
+              io.out("Task is not valid. Setting task to 'Nothing'.");
               task=0;
             }
             s.people.get(id).setTask(task);
-            d.out("Job set to: "+Person.getTaskName(task));
+            io.out("Job set to: "+Person.getTaskName(task));
           } else {
-            d.out("Please enter a valid name.");
+            io.out("Please enter a valid name.");
           }
         } else {
-          d.out("Please use the form: settask [person] [task]");
+          io.out("Please use the form: settask [person] [task]");
         }
       }
     }
