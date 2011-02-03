@@ -7,7 +7,8 @@ public class Initiation {
   SaveFile s;
   
   //Constants
-  int JOBS=6;
+  int JOBS=5;
+  String JLIST[]={"nothing","farming","building","resting","mining"}; //TODO: Get rid of the need for this, use just the tasks.
   
    //File Handling
   FileOutputStream fos;
@@ -85,19 +86,18 @@ public class Initiation {
           //get the person's id
           int id=s.getPerson(command[1]);
           if(id!=-1) {
-            int task=-1;
+            String task= "nothing";
             for(int i=0;i<JOBS;i++) {
-              if(Person.getTaskName(i).toLowerCase().equals(command[2])) {
-                task=i;
+              if(command[2].equals( JLIST[i])) {
+                task=command[2];
                 break;
               }
             }
-            if(task==-1) {
-              io.out("Task is not valid. Setting task to 'Nothing'.");
-              task=0;
+            if(task=="nothing") {
+              io.out("Setting task to \'nothing\'.");
             }
             s.people.get(id).setTask(task);
-            io.out("Job set to: "+Person.getTaskName(task));
+            io.out("Job set to: "+ Person.getTaskName(task));
           } else {
             io.out("Please enter a valid name.");
           }
