@@ -26,10 +26,10 @@ public class Person implements Serializable {
     
     task=0; //Nothing
     
-    age=20;
+    age=root.rand.random()%10+18;
     attr_str=root.rand.random()%10+1;
-    //attr_int=root.rand.random()%10+1;
-    attr_int=11-attr_str; //so that you don't get overly powerful, or weak characters
+    attr_int=root.rand.random()%10+1;
+    //attr_int=11-attr_str; //so that you don't get overly powerful, or weak characters -> However in real life there are people who are completely useless.
   }
   public void details() {
     root.d.out("Name: "+name);
