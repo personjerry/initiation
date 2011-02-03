@@ -8,7 +8,7 @@ public class Initiation {
   
   //Constants
   int JOBS=5;
-  String JLIST[]={"nothing","farming","building","resting","mining"}; //TODO: Get rid of the need for this, use just the tasks.
+  String JLIST[]={"nothing","farm","build","rest","mine"}; //TODO: Get rid of the need for this, use just the tasks.
   
    //File Handling
   FileOutputStream fos;

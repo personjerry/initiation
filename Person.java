@@ -49,13 +49,13 @@ public class Person implements Serializable {
   public static String getTaskName(String i) { //TODO: Get rid of the need for this, just use the task strings.
     if(i.equals("nothing"))
         return "Nothing";
-    else if(i.equals("farming"))
+    else if(i.equals("farm"))
         return "Farming";
-    else if(i.equals("building"))
+    else if(i.equals("build"))
         return "Building";
-    else if(i.equals("resting"))
+    else if(i.equals("rest"))
         return "Resting";
-    else if(i.equals("mining"))
+    else if(i.equals("mine"))
         return "Mining";
     return "Nothing (Not Set)";
   }
