@@ -30,11 +30,11 @@ public class Initiation {
       create();
       save("save.dat");
       io.out("File successfully created.");
-	    break;
+     break;
     } else {
       if(load("save.dat")) {
         io.out("Load successful.");
-	      break;
+       break;
       } else {
         io.out("Save file not found or corrupted.");
       }
@@ -43,12 +43,6 @@ public class Initiation {
     
     io.out("Welcome to Initiation.");
     io.out("//insert storyline here");
-    for(int i=0;i<s.people.size();i++) {
-      Person p=(Person)s.people.get(i);
-      p.details();
-      if(i!=s.people.size()-1)
-        io.out("-----------------------");
-    }
     boolean exit=false;
     while(!exit) {
       String c=io.nextLine();
@@ -58,21 +52,28 @@ public class Initiation {
       if(command[0].equals("help")) {
         if(command.length==1) {
           io.out("Commands:");
-          io.out("settask [person] [task]-assigns the task to the person");
-          io.out("day-a day goes by; your people do their tasks");
-          io.out("resources-displays a list of resources you have");
-          io.out("help [command]-shows help for that command");
-          io.out("exit-exits; how stupid are you?");
+          io.out("settask [person] [task]");
+          io.out("day");
+          io.out("resources");
+          io.out("people");
+          io.out("check [person]");
+          io.out("help [command]");
+          io.out("exit");
         } else if(command[1].equals("help")) {
-          io.out("you're asking how to use a command that you just used");
+          io.out("Shows help for that command.");
         } else if(command[1].equals("tasks")) {
-          io.out("not yet implemented, check back later");
+          io.out("Assigns the task to the person.");
+          io.out("Tasks are nothing, farm, build, rest, and mine.");
         } else if(command[1].equals("day")) {
-          io.out("not yet implemented, check back later");
+          io.out("A day goes by; your people do their tasks.");
         } else if(command[1].equals("resources")) {
-          io.out("displays a list of collected resources");
+          io.out("Displays a list of resources you have.");
+        } else if(command[1].equals("people")) {
+          io.out("Displays a list of your people.");
+        } else if(command[1].equals("check")) {
+          io.out("Displays statistics for the person.");
         } else if(command[1].equals("exit")) {
-          io.out("it exits");
+          io.out("Exits; how stupid are you?");
         }
       } else if(command[0].equals("exit")) {
         exit=true;
@@ -93,9 +94,6 @@ public class Initiation {
                 break;
               }
             }
-            if(task=="nothing") {
-              io.out("Setting task to \'nothing\'.");
-            }
             s.people.get(id).setTask(task);
             io.out("Job set to: "+ Person.getTaskName(task));
           } else {
@@ -103,6 +101,24 @@ public class Initiation {
           }
         } else {
           io.out("Please use the form: settask [person] [task]");
+        }
+      } else if(command[0].equals("people")) {
+        for(int i=0;i<s.people.size();i++) {
+          Person p=(Person)s.people.get(i);
+          io.out("-"+p.name);
+        }
+      } else if(command[0].equals("check")) {
+        if(command.length==2) {
+          //get the person's id
+          int id=s.getPerson(command[1]);
+          if(id!=-1) {
+            Person p=(Person)s.people.get(id);
+            p.details();
+          } else {
+            io.out("Please enter a valid name.");
+          }
+        } else {
+          io.out("Please use the form: check [person]");
         }
       }
     }
