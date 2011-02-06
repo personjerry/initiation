@@ -51,7 +51,7 @@ public class Initiation {
         if(command.length==1) {
           io.out("Commands:");
           io.out("settask [person] [task]");
-          io.out("day");
+          io.out("play");
           io.out("resources");
           io.out("people");
           io.out("check [person]");
@@ -98,38 +98,34 @@ public class Initiation {
         for(int i=0;i<s.getPop();i++) {
           io.out("-"+s.getPerson(i).name);
         }
-	} else if(command[0].equals("play")) {
-	int idle = 0;
+      } else if(command[0].equals("play")) {
+        int idle = 0;
         for(int i=0;i<s.people.size();i++) {
-          Person p=(Person)s.people.get(i);
-          if(p.getTask().equals("nothing"))
-	  {
-	    io.out("Warning: "+p.name+" is doing nothing!");
-	    idle++;
-	  }
-        }
-	  boolean day = true;
-	  if(idle>0)
-	  {
-	    io.out(""+idle+" person(s) are going to do nothing. Continue? (yes/no)");
-	    String prompt = io.nextLine();
-	    if (prompt.equals("yes"));
-	    else if(prompt.equals("no"))
-	    {
-	      day = false;
-	    }
-	    else
-	    {
-	      io.out("Unknown command, defaulted to \'no\'.");
-	      day = false;
-	    }
+          Person p=s.getPerson(i);
+          if(p.getTaskName().equals("nothing"))
+          {
+            io.out("Warning: "+p.name+" is doing nothing!");
+            idle++;
           }
-	  if(day)
-	  {
-	    endDay();
-	  }
-	}
-        else if(command[0].equals("check")) {
+        }
+        boolean day = true;
+        if(idle>0)
+        {
+          io.out(""+idle+" person(s) are going to do nothing. Continue? (yes/no)");
+          String prompt = io.nextLine();
+          if (prompt.equals("yes"));
+          else if(prompt.equals("no")) {
+            day = false;
+          }
+          else {
+            io.out("Unknown command, defaulted to \'no\'.");
+            day = false;
+          }
+        }
+        if(day) {
+          endDay();
+        }
+      } else if(command[0].equals("check")) {
         if(command.length==2) {
           //get the person's id
           int id=s.getPersonId(command[1]);
@@ -186,14 +182,7 @@ public class Initiation {
     //cycle through people, do jobs
     for(int i=0;i<s.getPop();i++) {
       Person p=s.getPerson(i);
-      if(p.task.task.equals("farm")) {
-        farm(p);
-      }
+      p.doTask();
     }
-  }
-  
-  //JOB FUNCTIONS
-  void farm(Person p) {
-    
   }
 }

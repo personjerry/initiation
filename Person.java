@@ -49,7 +49,29 @@ public class Person implements Serializable {
   public Task getTask() {
     return task;
   }
+  public String getTaskName() {
+    return task.task;
+  }
   public void setTask(Task t) {
     task=t;
+  }
+  public void doTask() {
+    boolean ableToWork=true; //no debilitating conditions yet
+    if(ableToWork) {
+      String tn=getTaskName();
+      if(tn.equals("farm")) {
+        int food=attr_int-root.rand.random()%10+2;
+        if(food>0) { //success?
+          if(food>1) {
+            root.io.out(name+" farmed, getting "+food+" pieces of food.");
+          } else {
+            root.io.out(name+" farmed, getting 1 piece of food.");
+          }
+          root.s.village.food+=food;
+        } else {
+          root.io.out(name+" farmed, but didn't manage to get any food.");
+        }
+      }
+    }
   }
 }
