@@ -22,7 +22,7 @@ public class Person implements Serializable {
     this.male=male;
     
     wg=new WordGen();
-    name=WordGen.fCap(wg.format(wg.ss(root.rand.random()%2+2)));
+    name=WordGen.fCap(wg.format(wg.ss(root.rand.random()%2+1)));
     
     task=new Task("nothing");
     

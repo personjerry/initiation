@@ -21,22 +21,22 @@ public class Initiation {
     io=new Interface();
     rand=new MT();
     while(true){
-    io.out("Would you like to create a new file, or load one? (new/load)");
-    String user_input=io.nextLine();
-    io.out("");
-    if(user_input.equals("new")) {
-      create();
-      save("save.dat");
-      io.out("File successfully created.");
-     break;
-    } else {
-      if(load("save.dat")) {
-        io.out("Load successful.");
-       break;
+      io.out("Would you like to create a new file, or load one? (new/load)");
+      String user_input=io.nextLine();
+      io.out("");
+      if(user_input.equals("new")) {
+        create();
+        save("save.dat");
+        io.out("File successfully created.");
+        break;
       } else {
-        io.out("Save file not found or corrupted.");
+        if(load("save.dat")) {
+          io.out("Load successful.");
+          break;
+        } else {
+          io.out("Save file not found or corrupted.");
+        }
       }
-    }
     }
     
     io.out("Welcome to Initiation.");
@@ -83,10 +83,9 @@ public class Initiation {
       } else if(command[0].equals("settask")) {
         if(command.length==3) {
           //get the person's id
-          int id=s.getPerson(command[1]);
+          int id=s.getPersonId(command[1]);
           if(id!=-1) {
             Task t=new Task(command[2]);
-            
             s.people.get(id).setTask(t);
             io.out("Job set to: "+ t.getDisplayName());
           } else {
@@ -96,17 +95,15 @@ public class Initiation {
           io.out("Please use the form: settask [person] [task]");
         }
       } else if(command[0].equals("people")) {
-        for(int i=0;i<s.people.size();i++) {
-          Person p=(Person)s.people.get(i);
-          io.out("-"+p.name);
+        for(int i=0;i<s.getPop();i++) {
+          io.out("-"+s.getPerson(i).name);
         }
       } else if(command[0].equals("check")) {
         if(command.length==2) {
           //get the person's id
-          int id=s.getPerson(command[1]);
+          int id=s.getPersonId(command[1]);
           if(id!=-1) {
-            Person p=(Person)s.people.get(id);
-            p.details();
+            s.getPerson(id).details();
           } else {
             io.out("Please enter a valid name.");
           }
@@ -128,9 +125,8 @@ public class Initiation {
       in.close();
       
       //call load functions of loaded classes (because root isn't stored)
-      for(int i=0;i<s.people.size();i++) {
-        Person p=(Person)s.people.get(i);
-        p.load(this);
+      for(int i=0;i<s.getPop();i++) {
+        s.getPerson(i).load(this);
       }
       s.village.load(this);
       
@@ -152,5 +148,21 @@ public class Initiation {
     } catch(IOException ex) {
       ex.printStackTrace();
     }
+  }
+  
+  //END DAY FUNCTION
+  void endDay() {
+    //cycle through people, do jobs
+    for(int i=0;i<s.getPop();i++) {
+      Person p=s.getPerson(i);
+      if(p.task.task.equals("farm")) {
+        farm(p);
+      }
+    }
+  }
+  
+  //JOB FUNCTIONS
+  void farm(Person p) {
+    
   }
 }

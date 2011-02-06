@@ -16,15 +16,24 @@ public class SaveFile implements Serializable {
   public void addPerson(Person p) {
     people.add(p);
   }
-  public int getPerson(String name) {
+  public int getPersonId(String name) {
     name=WordGen.fCap(name);
-    for(int i=0;i<people.size();i++) {
-      Person p=(Person)people.get(i);
-      if(p.name.equals(name)) {
+    for(int i=0;i<getPop();i++) {
+      if(getPerson(i).name.equals(name)) {
         return i;
       }
     }
     return -1;
+  }
+  public Person getPerson(int id) {
+    if(id<getPop()) {
+      Person p=(Person)people.get(id);
+      return p;
+    }
+    return null;
+  }
+  public int getPop() {
+    return people.size();
   }
   public void removePerson(int i) {
     people.remove(i);
