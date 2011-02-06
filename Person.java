@@ -5,7 +5,7 @@ public class Person implements Serializable {
   transient WordGen wg;
   
   public String name;
-  public String task;
+  public Task task;
   public boolean male;
   public int age;
   public int attr_str;
@@ -24,7 +24,7 @@ public class Person implements Serializable {
     wg=new WordGen();
     name=WordGen.fCap(wg.format(wg.ss(root.rand.random()%2+2)));
     
-    task="nothing"; //Nothing
+    task=new Task("nothing");
     
     age=root.rand.random()%10+18;
     attr_str=root.rand.random()%10+1;
@@ -33,7 +33,7 @@ public class Person implements Serializable {
   }
   public void details() {
     root.io.out("Name: "+name);
-    root.io.out("Task: "+getTask());
+    root.io.out("Task: "+getTask().getDisplayName());
     if(male)
       root.io.out("Male");
     else
@@ -45,25 +45,11 @@ public class Person implements Serializable {
   public void load(Initiation root) {
     this.root=root;
     wg=new WordGen();
-  }
-  public static String getTaskName(String i) { //TODO: Get rid of the need for this, just use the task strings.
-    if(i.equals("nothing"))
-        return "Nothing";
-    else if(i.equals("farm"))
-        return "Farming";
-    else if(i.equals("build"))
-        return "Building";
-    else if(i.equals("rest"))
-        return "Resting";
-    else if(i.equals("mine"))
-        return "Mining";
-    return "Nothing (Not Set)";
-  }
-    
-  public String getTask() {
+  }    
+  public Task getTask() {
     return task;
   }
-  public void setTask(String i) {
-    task=i;
+  public void setTask(Task t) {
+    task=t;
   }
 }

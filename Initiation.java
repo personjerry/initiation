@@ -6,9 +6,7 @@ public class Initiation {
   MT rand;
   SaveFile s;
   
-  //Constants
-  int JOBS=5;
-  String JLIST[]={"nothing","farm","build","rest","mine"}; //TODO: Get rid of the need for this, use just the tasks.
+  //Constants (None)
   
    //File Handling
   FileOutputStream fos;
@@ -87,15 +85,10 @@ public class Initiation {
           //get the person's id
           int id=s.getPerson(command[1]);
           if(id!=-1) {
-            String task= "nothing";
-            for(int i=0;i<JOBS;i++) {
-              if(command[2].equals( JLIST[i])) {
-                task=command[2];
-                break;
-              }
-            }
-            s.people.get(id).setTask(task);
-            io.out("Job set to: "+ Person.getTaskName(task));
+            Task t=new Task(command[2]);
+            
+            s.people.get(id).setTask(t);
+            io.out("Job set to: "+ t.getDisplayName());
           } else {
             io.out("Please enter a valid name.");
           }
