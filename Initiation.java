@@ -56,10 +56,11 @@ public class Initiation {
           io.out("people");
           io.out("check [person]");
           io.out("help [command]");
+          io.out("verbose");
           io.out("exit");
         } else if(command[1].equals("help")) {
           io.out("Shows help for that command.");
-        } else if(command[1].equals("tasks")) {
+        } else if(command[1].equals("tasks") ||command[1].equals("settask") ) {
           io.out("Assigns the task to the person.");
           io.out("Tasks are nothing, farm, build, rest, and mine.");
         } else if(command[1].equals("play")) {
@@ -70,8 +71,12 @@ public class Initiation {
           io.out("Displays a list of your people.");
         } else if(command[1].equals("check")) {
           io.out("Displays statistics for the person.");
+        } else if(command[1].equals("verbose")) {
+          io.out("Toggles some text. Check resources to see if it is on.");
         } else if(command[1].equals("exit")) {
           io.out("Exits; how stupid are you?");
+        } else {
+          io.out("Unknown command, type \'help\' for commands.");
         }
       } else if(command[0].equals("exit")) {
         exit=true;
@@ -80,7 +85,9 @@ public class Initiation {
         io.out("Food: "+s.village.food);
         io.out("Wood: "+s.village.wood);
         io.out("Stone: "+s.village.stone);
-      } else if(command[0].equals("settask")) {
+        io.out("Crop: "+s.village.crop);
+        io.out("Verbose: "+s.village.verbose);
+      } else if(command[0].equals("settask") || command[0].equals("assign")  ) { //assign now works as settask
         if(command.length==3) {
           //get the person's id
           int id=s.getPersonId(command[1]);
@@ -98,7 +105,7 @@ public class Initiation {
         for(int i=0;i<s.getPop();i++) {
           io.out("-"+s.getPerson(i).name);
         }
-      } else if(command[0].equals("play")) {
+      } else if(command[0].equals("play") || command[0].equals("p")  ) { //p now works as play
         int idle = 0;
         for(int i=0;i<s.people.size();i++) {
           Person p=s.getPerson(i);
@@ -137,6 +144,11 @@ public class Initiation {
         } else {
           io.out("Please use the form: check [person]");
         }
+      } else if(command[0].equals("verbose")) {
+	io.out("Verbose is now "+!s.village.verbose);
+	s.village.verbose=!s.village.verbose;
+      } else {
+	io.out("Unknown command, type \'help\' for commands.");
       }
     }
     save("save.dat");
@@ -183,6 +195,28 @@ public class Initiation {
     for(int i=0;i<s.getPop();i++) {
       Person p=s.getPerson(i);
       p.doTask();
+      p.live();
+      if(s.village.verbose)
+      {
+        io.out("Press enter to continue...");
+        if(i==0)
+        {
+          io.out("(You can toggle this prompt by typing \'verbose\' at the menu)");
+        }
+	io.pressEnter();
+      }
     }
+    int tempcrop = 0;
+    int tempfood = 0;
+    for(int i=0;i<s.village.crop;i++) {
+      if(rand.random()%20<2)
+      {
+	tempcrop++;
+	tempfood+=rand.random()%6+5;
+      }
+    }
+    io.out(""+tempcrop+" crops matured, yielding "+tempfood+" food.");
+    s.village.food+=tempfood;
+    s.village.crop-=tempcrop;
   }
 }

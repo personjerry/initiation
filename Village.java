@@ -5,11 +5,15 @@ public class Village implements Serializable {
   int food;
   int wood;
   int stone;
+  int crop;
+  boolean verbose;
   Village(Initiation root) {
     this.root=root;
-    food=0;
+    food=20;
     wood=0;
     stone=0;
+    crop=0;
+    verbose=true;
   }
   public void load(Initiation root) {
     this.root=root;

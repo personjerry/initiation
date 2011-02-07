@@ -18,4 +18,7 @@ public class Interface {
     System.out.print("-->");
     return s.nextLine();
   }
+  public String pressEnter() {
+    return s.nextLine();
+  }
 }

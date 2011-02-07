@@ -45,7 +45,7 @@ public class Person implements Serializable {
   public void load(Initiation root) {
     this.root=root;
     wg=new WordGen();
-  }    
+  }
   public Task getTask() {
     return task;
   }
@@ -60,18 +60,23 @@ public class Person implements Serializable {
     if(ableToWork) {
       String tn=getTaskName();
       if(tn.equals("farm")) {
-        int food=attr_int-root.rand.random()%10+2;
-        if(food>0) { //success?
-          if(food>1) {
-            root.io.out(name+" farmed, getting "+food+" pieces of food.");
+        int crop=(attr_int-root.rand.random()%10>3)?(attr_str-root.rand.random()%10+2):0;
+        if(crop>0) { //success?
+          if(crop>1) {
+            root.io.out(name+" farmed, growing "+crop+" crops.");
           } else {
-            root.io.out(name+" farmed, getting 1 piece of food.");
+            root.io.out(name+" farmed, growing 1 crop.");
           }
-          root.s.village.food+=food;
+          root.s.village.crop+=crop;
         } else {
-          root.io.out(name+" farmed, but didn't manage to get any food.");
+          root.io.out(name+" farmed, but couldn't grow any crops.");
         }
       }
     }
+  }
+  public void live() {
+    int temp =(int)Math.ceil(age/10.0);
+    root.io.out(name+" ate "+temp+" food.");
+    root.s.village.food-=temp;    
   }
 }
