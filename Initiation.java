@@ -86,6 +86,7 @@ public class Initiation {
         io.out("Wood: "+s.village.wood);
         io.out("Stone: "+s.village.stone);
         io.out("Crop: "+s.village.crop);
+        io.out("Iron: "+s.village.iron);
         io.out("Verbose: "+s.village.verbose);
       } else if(command[0].equals("settask") || command[0].equals("assign")  ) { //assign now works as settask
         if(command.length==3) {
@@ -109,8 +110,7 @@ public class Initiation {
         int idle = 0;
         for(int i=0;i<s.people.size();i++) {
           Person p=s.getPerson(i);
-          if(p.getTaskName().equals("nothing"))
-          {
+          if(p.getTaskName().equals("nothing")) {
             io.out("Warning: "+p.name+" is doing nothing!");
             idle++;
           }
@@ -145,10 +145,10 @@ public class Initiation {
           io.out("Please use the form: check [person]");
         }
       } else if(command[0].equals("verbose")) {
-	io.out("Verbose is now "+!s.village.verbose);
-	s.village.verbose=!s.village.verbose;
+        io.out("Verbose is now "+!s.village.verbose);
+        s.village.verbose=!s.village.verbose;
       } else {
-	io.out("Unknown command, type \'help\' for commands.");
+        io.out("Unknown command, type \'help\' for commands.");
       }
     }
     save("save.dat");
@@ -196,23 +196,20 @@ public class Initiation {
       Person p=s.getPerson(i);
       p.doTask();
       p.live();
-      if(s.village.verbose)
-      {
+      if(s.village.verbose) {
         io.out("Press enter to continue...");
-        if(i==0)
-        {
+        if(i==0) {
           io.out("(You can toggle this prompt by typing \'verbose\' at the menu)");
         }
-	io.pressEnter();
+      io.pressEnter();
       }
     }
     int tempcrop = 0;
     int tempfood = 0;
     for(int i=0;i<s.village.crop;i++) {
-      if(rand.random()%20<2)
-      {
-	tempcrop++;
-	tempfood+=rand.random()%6+5;
+      if(rand.random()%20<2) {
+        tempcrop++;
+        tempfood+=rand.random()%6+5;
       }
     }
     io.out(""+tempcrop+" crops matured, yielding "+tempfood+" food.");

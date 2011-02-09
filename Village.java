@@ -6,6 +6,7 @@ public class Village implements Serializable {
   int wood;
   int stone;
   int crop;
+  int iron;
   boolean verbose;
   Village(Initiation root) {
     this.root=root;
@@ -13,6 +14,7 @@ public class Village implements Serializable {
     wood=0;
     stone=0;
     crop=0;
+    iron=0;
     verbose=true;
   }
   public void load(Initiation root) {

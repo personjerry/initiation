@@ -72,6 +72,37 @@ public class Person implements Serializable {
           root.io.out(name+" farmed, but couldn't grow any crops.");
         }
       }
+      if(tn.equals("mine")) {
+        int stone=(attr_str-root.rand.random()%10>3)?(attr_str-root.rand.random()%10+2):0;
+        if(stone>0) { //success?
+          if(stone>1) {
+            root.io.out(name+" mined, getting "+stone+" units of stone.");
+          } else {
+            root.io.out(name+" mined, getting 1 unit of stone.");
+          }
+          root.s.village.stone+=stone;
+          int iron=0;
+          for(int i=0;i<stone;i++) {
+            if(root.rand.random()%10==0) {
+              iron++;
+            }
+          }
+          if(iron>0) {
+            if(iron>1) {
+              root.io.out("While mining, "+name+" also found "+iron+" units of iron.");
+            } else {
+              root.io.out("While mining, "+name+" also found 1 unit of iron.");
+            }
+            root.s.village.iron+=iron;
+          }
+        } else {
+          if(root.rand.random()%25!=0) {
+            root.io.out(name+" mined, but didn't get any stone.");
+          } else {
+            root.io.out(name+" drank instead of mining, but didn't get stoned."); //EASTER EGG!!!!11oneone1
+          }
+        }
+      }
     }
   }
   public void live() {
