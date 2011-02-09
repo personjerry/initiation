@@ -27,6 +27,12 @@ public class Task implements Serializable {
     if(task.equals("mine")) {
       return "Mining";
     }
+    if(task.equals("trainint")) {
+      return "Training Intelligence";
+    }
+    if(task.equals("trainstr")) {
+      return "Training Strength";
+    }
     return "Nothing";
   }
   public static boolean isValidTask(String taskname) {
@@ -35,7 +41,9 @@ public class Task implements Serializable {
        taskname.equals("farm")||
        taskname.equals("build")||
        taskname.equals("rest")||
-       taskname.equals("mine")) {
+       taskname.equals("mine")||
+       taskname.equals("trainint")||
+       taskname.equals("trainstr")) {
       return true;
     }
     return false;

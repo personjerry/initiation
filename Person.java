@@ -103,6 +103,22 @@ public class Person implements Serializable {
           }
         }
       }
+      if(tn.equals("trainint")) {
+        if(root.rand.random()%10>3) {
+          root.io.out(name+" got one additional intelligence point.");
+          attr_int+=1;
+        } else {
+          root.io.out(name+" trained intelligence, but didn't get any smarter.");
+        }
+      }
+      if(tn.equals("trainstr")) {
+        if(root.rand.random()%10>3) {
+          root.io.out(name+" got one additional strength point.");
+          attr_str+=1;
+        } else {
+          root.io.out(name+" worked out, but didn't get any stronger.");
+        }
+      }
     }
   }
   public void live() {

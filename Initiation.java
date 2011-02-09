@@ -62,7 +62,7 @@ public class Initiation {
           io.out("Shows help for that command.");
         } else if(command[1].equals("tasks") ||command[1].equals("settask") ) {
           io.out("Assigns the task to the person.");
-          io.out("Tasks are nothing, farm, build, rest, and mine.");
+          io.out("Tasks are nothing, farm, build, rest, trainint, trainstr, and mine.");
         } else if(command[1].equals("play")) {
           io.out("A day goes by; your people do their tasks.");
         } else if(command[1].equals("resources")) {
