@@ -212,7 +212,7 @@ public class Initiation {
       if(rand.random()%20<2)
       {
 	tempcrop++;
-	tempfood+=rand.random()%6+5;
+	tempfood+=rand.random()%4+2;
       }
     }
     io.out(""+tempcrop+" crops matured, yielding "+tempfood+" food.");
