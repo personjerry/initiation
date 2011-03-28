@@ -15,7 +15,7 @@ public class Village implements Serializable {
     stone=0;
     crop=0;
     iron=0;
-    verbose=true;
+    verbose=false; //I would always forget to change this and it would annoy me
   }
   public void load(Initiation root) {
     this.root=root;

@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Interface {
   //MARQUEE SETTING
-  boolean MARQUEE=true;
+  boolean MARQUEE=false;
   
   Scanner s;
   public Interface() { 
