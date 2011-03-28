@@ -56,23 +56,7 @@ public class Person implements Serializable {
     task=t;
   }
   public void doTask() {
-    boolean ableToWork=true; //no debilitating conditions yet
-    if(ableToWork) {
-      String tn=getTaskName();
-      if(tn.equals("farm")) {
-        int crop=(attr_int-root.rand.random()%10>3)?(attr_str-root.rand.random()%10+2):0;
-        if(crop>0) { //success?
-          if(crop>1) {
-            root.io.out(name+" farmed, growing "+crop+" crops.");
-          } else {
-            root.io.out(name+" farmed, growing 1 crop.");
-          }
-          root.s.village.crop+=crop;
-        } else {
-          root.io.out(name+" farmed, but couldn't grow any crops.");
-        }
-      }
-    }
+	  task.execute(this);
   }
   public void live() {
     int temp =(int)Math.ceil(age/10.0);
