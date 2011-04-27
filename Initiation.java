@@ -8,7 +8,7 @@ public class Initiation {
   
   //Constants (None)
   
-   //File Handling
+  //File Handling
   FileOutputStream fos;
   ObjectOutputStream out;
   FileInputStream fis;
@@ -145,10 +145,10 @@ public class Initiation {
           io.out("Please use the form: check [person]");
         }
       } else if(command[0].equals("verbose")) {
-	io.out("Verbose is now "+!s.village.verbose);
-	s.village.verbose=!s.village.verbose;
+        io.out("Verbose is now "+!s.village.verbose);
+        s.village.verbose=!s.village.verbose;
       } else {
-	io.out("Unknown command, type \'help\' for commands.");
+        io.out("Unknown command, type \'help\' for commands.");
       }
     }
     save("save.dat");
@@ -203,7 +203,7 @@ public class Initiation {
         {
           io.out("(You can toggle this prompt by typing \'verbose\' at the menu)");
         }
-	io.pressEnter();
+        io.pressEnter();
       }
     }
     int tempcrop = 0;
@@ -211,8 +211,8 @@ public class Initiation {
     for(int i=0;i<s.village.crop;i++) {
       if(rand.random()%20<2)
       {
-	tempcrop++;
-	tempfood+=rand.random()%4+2;
+        tempcrop++;
+        tempfood+=rand.random()%4+2;
       }
     }
     io.out(""+tempcrop+" crops matured, yielding "+tempfood+" food.");
