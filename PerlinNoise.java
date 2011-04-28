@@ -10,8 +10,8 @@ public class PerlinNoise {
   static final int SEED_NOISE_GEN = 13397; //random prime (orig. 1013)
   
   public static void main(String[] args) {
-    PerlinNoise p=new PerlinNoise(50,.5,314159);
-    double zoom=.5; //lower, the more zoomed in; .5 seems good
+    PerlinNoise p=new PerlinNoise(20,.6,984);
+    double zoom=.125; //lower, the more zoomed in; .5 seems good
     for(double i=0;i<20*zoom;i+=zoom) {
       for(double j=0;j<50*zoom;j+=zoom) {
         if(p.perlin_noise(i,j)<0) {
@@ -64,8 +64,8 @@ public class PerlinNoise {
     double total=0;
     
     for(int i=0;i<octaves;i++) {
-      int frequency=(int)Math.pow(2,i);
-      int amplitude=(int)Math.pow(persistance,i);
+      double frequency=Math.pow(2,i);
+      double amplitude=Math.pow(persistance,i);
       total=total+interpolated_noise(x*frequency,y*frequency,i)*amplitude;
     }
     
