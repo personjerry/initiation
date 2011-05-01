@@ -41,8 +41,8 @@ public class Task implements Serializable {
     return false;
   }
   public void execute(Person doer) {
-	  
-   
+    
+    
     boolean ableToWork=true; //no debilitating conditions yet
     if(ableToWork) {
       if(task.equals("farm")) {
@@ -106,5 +106,5 @@ public class Task implements Serializable {
         }
       }
     }
-    }
+  }
 }

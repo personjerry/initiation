@@ -2,40 +2,9 @@ import java.util.*;
 import java.io.*;
 
 public class SaveFile implements Serializable {
-  Vector<Person> people;
   Village village;
-  SaveFile(Initiation root) {
-    //add some people
-    people=new Vector<Person>();
-    addPerson(new Person(root,true));
-    addPerson(new Person(root,false));
-    
+  SaveFile(Initiation root) {    
     //make the village
     village=new Village(root);
-  }
-  public void addPerson(Person p) {
-    people.add(p);
-  }
-  public int getPersonId(String name) {
-    name=WordGen.fCap(name);
-    for(int i=0;i<getPop();i++) {
-      if(getPerson(i).name.equals(name)) {
-        return i;
-      }
-    }
-    return -1;
-  }
-  public Person getPerson(int id) {
-    if(id<getPop()) {
-      Person p=(Person)people.get(id);
-      return p;
-    }
-    return null;
-  }
-  public int getPop() {
-    return people.size();
-  }
-  public void removePerson(int i) {
-    people.remove(i);
   }
 }

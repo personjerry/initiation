@@ -90,10 +90,10 @@ public class Initiation {
       } else if(command[0].equals("settask") || command[0].equals("assign")  ) { //assign now works as settask
         if(command.length==3) {
           //get the person's id
-          int id=s.getPersonId(command[1]);
+          int id=s.village.getPersonId(command[1]);
           if(id!=-1) {
             Task t=new Task(command[2]);
-            s.people.get(id).setTask(t);
+            s.village.people.get(id).setTask(t);
             io.out("Job set to: "+ t.getDisplayName());
           } else {
             io.out("Please enter a valid name.");
@@ -102,13 +102,13 @@ public class Initiation {
           io.out("Please use the form: settask [person] [task]");
         }
       } else if(command[0].equals("people")) {
-        for(int i=0;i<s.getPop();i++) {
-          io.out("-"+s.getPerson(i).name);
+        for(int i=0;i<s.village.getPop();i++) {
+          io.out("-"+s.village.getPerson(i).name);
         }
       } else if(command[0].equals("play") || command[0].equals("p")  ) { //p now works as play
         int idle = 0;
-        for(int i=0;i<s.people.size();i++) {
-          Person p=s.getPerson(i);
+        for(int i=0;i<s.village.people.size();i++) {
+          Person p=s.village.getPerson(i);
           if(p.getTaskName().equals("nothing"))
           {
             io.out("Warning: "+p.name+" is doing nothing!");
@@ -135,9 +135,9 @@ public class Initiation {
       } else if(command[0].equals("check")) {
         if(command.length==2) {
           //get the person's id
-          int id=s.getPersonId(command[1]);
+          int id=s.village.getPersonId(command[1]);
           if(id!=-1) {
-            s.getPerson(id).details();
+            s.village.getPerson(id).details();
           } else {
             io.out("Please enter a valid name.");
           }
@@ -164,8 +164,8 @@ public class Initiation {
       in.close();
       
       //call load functions of loaded classes (because root isn't stored)
-      for(int i=0;i<s.getPop();i++) {
-        s.getPerson(i).load(this);
+      for(int i=0;i<s.village.getPop();i++) {
+        s.village.getPerson(i).load(this);
       }
       s.village.load(this);
       
@@ -192,8 +192,8 @@ public class Initiation {
   //END DAY FUNCTION
   void endDay() {
     //cycle through people, do jobs
-    for(int i=0;i<s.getPop();i++) {
-      Person p=s.getPerson(i);
+    for(int i=0;i<s.village.getPop();i++) {
+      Person p=s.village.getPerson(i);
       p.doTask();
       p.live();
       if(s.village.verbose)
