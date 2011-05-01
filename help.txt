@@ -13,4 +13,6 @@ Mining takes a bit of strength, and may yield stone.
 Training may increase attributes.
 Building storage buildings will let you store more food. Requires wood, which is currently not available.
 Building walls will increase your town defenses, but that is currently not useful. Requires wood, which is currently not available.
+Scouting may result in finding... almost anything! But it gets riskier and less profitable as time goes on.
+
 Every day, some crops may grow to yield food.

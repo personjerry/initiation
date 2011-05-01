@@ -62,7 +62,7 @@ public class Initiation {
           io.out("Shows help for that command.");
         } else if(command[1].equals("tasks") ||command[1].equals("settask") ) {
           io.out("Assigns the task to the person.");
-          io.out("Tasks are nothing, farm, build, train, rest, and mine.");
+          io.out("Tasks are nothing, farm, build, train, rest, scout and mine.");
           io.out("Some commands like build and train take another parameter,");
           io.out("consult help.txt for more info.");
         } else if(command[1].equals("play")) {
@@ -92,7 +92,7 @@ public class Initiation {
         io.out("-Storage: "+s.village.countBuildings(0));
         io.out("-Walls: "+s.village.countBuildings(1));
         io.out("Verbose: "+s.village.verbose);
-      } else if(command[0].equals("settask") || command[0].equals("assign")  ) { //assign now works as settask
+      } else if(command[0].equals("settask") || command[0].equals("assign") ||command[0].equals("set") ) { //assign now works as settask, using set instead of settask also works and is more convenient
         if(command.length==3||command.length==4) {
           //get the person's id
           int id=s.village.getPersonId(command[1]);

@@ -36,6 +36,9 @@ public class Task implements Serializable {
     if(task.equals("mine")) {
       return "Mining";
     }
+    if(task.equals("scout")) {
+      return "Scouting";
+    }
     return "Nothing";
   }
   public static boolean isValidTask(String taskname,String secondaryname) {
@@ -43,7 +46,8 @@ public class Task implements Serializable {
     if(taskname.equals("nothing")||
        taskname.equals("farm")||
        taskname.equals("rest")||
-       taskname.equals("mine")) {
+       taskname.equals("mine")||
+       taskname.equals("scout")) {
       return true;
     } else if((taskname.equals("build")&&(secondaryname.equals("wall")||secondaryname.equals("storage")))||
               (taskname.equals("train")&&(secondaryname.equals("int")||secondaryname.equals("str")))) {
@@ -134,6 +138,46 @@ public class Task implements Serializable {
           } else {
             doer.root.io.out(doer.name+" tried to build a wall, but didn't have enough wood.");
           }
+        }
+      }
+      if(task.equals("scout")) {
+        int roll = doer.root.rand.random()%100;
+        if(roll < 20)
+        {        
+          doer.root.io.out(doer.name + " found a small patch of wheat!");
+          int yield = (doer.root.rand.random() % (doer.root.s.village.people.size() * 15))+(doer.root.s.village.people.size());
+          yield = Math.min(yield, doer.attr_str * 3); //can only carry 3 times strength in food
+          doer.root.io.out(doer.name + " managed to carry " + yield + " units of food back to town.");
+          doer.root.s.village.food += yield;
+        }
+        else if (roll < 30)
+        {
+          int storyroll = doer.root.rand.random()%3;
+          if(storyroll == 0)
+          {
+            doer.root.io.out(doer.name + " found a tree severed by lightning!");
+          }
+          else if (storyroll == 1)
+          {
+            doer.root.io.out(doer.name + " found a log floating in a pond!");
+          }
+          else
+          {
+            doer.root.io.out(doer.name + " found a broken fence!");
+          }
+          if((doer.root.rand.random()%(doer.attr_str+5))>(doer.root.rand.random()%(doer.attr_str)))
+          {
+            doer.root.io.out(doer.name + " managed to carry the wood home. The village now has 1 more piece of wood.");
+            doer.root.s.village.wood++;
+          }
+          else
+          {
+            doer.root.io.out(doer.name + " was unfortunately not able to lift it home.");
+          }
+        }
+        else
+        {        
+          doer.root.io.out(doer.name + " returned home safely.");          
         }
       }
     }

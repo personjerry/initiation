@@ -19,6 +19,8 @@
 -Better ways to roll for things (we don't want complex lines)
 -Rephrase building construction that refers to "wood"
 -Construct buildings with stone as an option.
+-Checking assigned tasks on a person should write the parameter too. That code (checking for parameters) needs to be made cleaner...?
+-Should we have more "else if" in the task handler functions?
 
 ////////////////////////
 ///Miscellaneous     ///
