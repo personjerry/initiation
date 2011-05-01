@@ -2,11 +2,17 @@ import java.io.*;
 
 public class Task implements Serializable {
   String task;
+  String secondary; //for instance, "train int"="train">task, "int">secondary
   
   Task(String taskname) {
+    this(taskname,"");
+  }
+  Task(String taskname,String secondary_task) {
     taskname=taskname.toLowerCase();
-    if(isValidTask(taskname)) {
+    secondary_task=secondary_task.toLowerCase();
+    if(isValidTask(taskname,secondary_task)) {
       task=taskname;
+      secondary=secondary_task;
     } else {
       task="nothing";
     }
@@ -21,6 +27,9 @@ public class Task implements Serializable {
     if(task.equals("build")) {
       return "Building";
     }
+    if(task.equals("train")) {
+      return "Training";
+    }
     if(task.equals("rest")) {
       return "Resting";
     }
@@ -29,13 +38,15 @@ public class Task implements Serializable {
     }
     return "Nothing";
   }
-  public static boolean isValidTask(String taskname) {
+  public static boolean isValidTask(String taskname,String secondaryname) {
     taskname=taskname.toLowerCase();
     if(taskname.equals("nothing")||
        taskname.equals("farm")||
-       taskname.equals("build")||
        taskname.equals("rest")||
        taskname.equals("mine")) {
+      return true;
+    } else if((taskname.equals("build")&&(secondaryname.equals("wall")||secondaryname.equals("storage")))||
+              (taskname.equals("train")&&(secondaryname.equals("int")||secondaryname.equals("str")))) {
       return true;
     }
     return false;
@@ -46,7 +57,7 @@ public class Task implements Serializable {
     boolean ableToWork=true; //no debilitating conditions yet
     if(ableToWork) {
       if(task.equals("farm")) {
-        int crop=(doer.attr_int-doer.root.rand.random()%10>3)?(doer.attr_str-doer.root.rand.random()%10+2):0;
+        int crop=(doer.attr_int-doer.root.rand.random()%10>3)?(doer.attr_str-doer.root.rand.random()%10+2):0; //this is complicated; make it make sense please
         if(crop>0) { //success?
           if(crop>1) {
             doer.root.io.out(doer.name+" farmed, growing "+crop+" crops.");
@@ -59,7 +70,7 @@ public class Task implements Serializable {
         }
       }
       if(task.equals("mine")) {
-        int stone=(doer.attr_str-doer.root.rand.random()%10>3)?(doer.attr_str-doer.root.rand.random()%10+2):0;
+        int stone=(doer.attr_str-doer.root.rand.random()%10>3)?(doer.attr_str-doer.root.rand.random()%10+2):0; //this is complicated; make it make sense please
         if(stone>0) { //success?
           if(stone>1) {
             doer.root.io.out(doer.name+" mined, getting "+stone+" units of stone.");
@@ -89,20 +100,21 @@ public class Task implements Serializable {
           }
         }
       }
-      if(task.equals("trainint")) {
-        if(doer.root.rand.random()%10>3) {
-          doer.root.io.out(doer.name+" got one additional intelligence point.");
-          doer.attr_int+=1;
-        } else {
-          doer.root.io.out(doer.name+" trained intelligence, but didn't get any smarter.");
-        }
-      }
-      if(task.equals("trainstr")) {
-        if(doer.root.rand.random()%10>3) {
-          doer.root.io.out(doer.name+" got one additional strength point.");
-          doer.attr_str+=1;
-        } else {
-          doer.root.io.out(doer.name+" worked out, but didn't get any stronger.");
+      if(task.equals("train")) {
+        if(secondary.equals("int")) {
+          if(doer.root.rand.random()%10>3) {
+            doer.root.io.out(doer.name+" got one additional intelligence point.");
+            doer.attr_int+=1;
+          } else {
+            doer.root.io.out(doer.name+" trained intelligence, but didn't get any smarter.");
+          }
+        } else if(secondary.equals("str")) {
+          if(doer.root.rand.random()%10>3) {
+            doer.root.io.out(doer.name+" got one additional strength point.");
+            doer.attr_str+=1;
+          } else {
+            doer.root.io.out(doer.name+" worked out, but didn't get any stronger.");
+          }
         }
       }
     }

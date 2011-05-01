@@ -88,11 +88,12 @@ public class Initiation {
         io.out("Crop: "+s.village.crop);
         io.out("Verbose: "+s.village.verbose);
       } else if(command[0].equals("settask") || command[0].equals("assign")  ) { //assign now works as settask
-        if(command.length==3) {
+        if(command.length==3||command.length==4) {
           //get the person's id
           int id=s.village.getPersonId(command[1]);
           if(id!=-1) {
             Task t=new Task(command[2]);
+            if(command.length==4) t=new Task(command[2],command[3]);
             s.village.people.get(id).setTask(t);
             io.out("Job set to: "+ t.getDisplayName());
           } else {
