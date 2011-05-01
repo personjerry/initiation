@@ -117,6 +117,25 @@ public class Task implements Serializable {
           }
         }
       }
+      if(task.equals("build")) {
+        if(secondary.equals("storage")) {
+          if(doer.root.s.village.wood>0) {
+            doer.root.s.village.wood--;
+            doer.root.s.village.addBuilding(new Building(0,0,1));
+            doer.root.io.out(doer.name+" contructed a storage building using his wood.");
+          } else {
+            doer.root.io.out(doer.name+" tried to build a storage building, but didn't have enough wood.");
+          }
+        } else if(secondary.equals("wall")) {
+          if(doer.root.s.village.wood>0) {
+            doer.root.s.village.wood--;
+           doer.root.s.village.addBuilding(new Building(1,0,1));
+            doer.root.io.out(doer.name+" contructed a wall using his wood.");
+          } else {
+            doer.root.io.out(doer.name+" tried to build a wall, but didn't have enough wood.");
+          }
+        }
+      }
     }
   }
 }

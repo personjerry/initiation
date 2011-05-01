@@ -10,10 +10,11 @@ public class Village implements Serializable {
   int iron;
   boolean verbose;
   Vector<Person> people;
+  Vector<Building> buildings;
   Village(Initiation root) {
     this.root=root;
     food=20;
-    wood=0;
+    wood=10;
     stone=0;
     crop=0;
     iron=0;
@@ -23,6 +24,12 @@ public class Village implements Serializable {
     people=new Vector<Person>();
     addPerson(new Person(root,true));
     addPerson(new Person(root,false));
+    
+    //initialize buildings vector
+    buildings=new Vector<Building>();
+    //you start with two storage buildings of size 1 made of wood
+    addBuilding(new Building(0,0,1));
+    addBuilding(new Building(0,0,1));
   }
   public void load(Initiation root) {
     this.root=root;
@@ -53,5 +60,40 @@ public class Village implements Serializable {
   }
   public void removePerson(int i) {
     people.remove(i);
+  }
+  
+  /* BUILDING FUNCTIONS */
+  public void addBuilding(Building b) {
+    buildings.add(b);
+  }
+  public int getBuildingId(Building b) {
+    //note: buildings are not unique; this function finds the id of the first equivalant building
+    for(int i=0;i<getBuildingNum();i++) {
+      if(getBuilding(i).equals(b)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  public Building getBuilding(int id) {
+    if(id<getBuildingNum()) {
+      Building b=(Building)buildings.get(id);
+      return b;
+    }
+    return null;
+  }
+  public int getBuildingNum() {
+    return buildings.size();
+  }
+  public void removeBuilding(int id) {
+    buildings.remove(id);
+  }
+  public int countBuildings(int type) {
+    int count=0;
+    for(int i=0;i<getBuildingNum();i++) {
+      if(getBuilding(i).type==type)
+        count++;
+    }
+    return count;
   }
 }

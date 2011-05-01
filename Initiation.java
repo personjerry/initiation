@@ -86,6 +86,9 @@ public class Initiation {
         io.out("Wood: "+s.village.wood);
         io.out("Stone: "+s.village.stone);
         io.out("Crop: "+s.village.crop);
+        io.out("Buildings:");
+        io.out("-Storage: "+s.village.countBuildings(0));
+        io.out("-Walls: "+s.village.countBuildings(1));
         io.out("Verbose: "+s.village.verbose);
       } else if(command[0].equals("settask") || command[0].equals("assign")  ) { //assign now works as settask
         if(command.length==3||command.length==4) {
@@ -216,8 +219,17 @@ public class Initiation {
         tempfood+=rand.random()%4+2;
       }
     }
-    io.out(""+tempcrop+" crops matured, yielding "+tempfood+" food.");
-    s.village.food+=tempfood;
-    s.village.crop-=tempcrop;
+    if(tempcrop>0) {
+      io.out(""+tempcrop+" crops matured, yielding "+tempfood+" food.");
+      s.village.food+=tempfood;
+      s.village.crop-=tempcrop;
+    }
+    
+    //Rot food without storage
+    int amt_storage=s.village.countBuildings(0)*10;
+    if(s.village.food>amt_storage) {
+      io.out((s.village.food-amt_storage)+" food rotted, leaving you with "+(amt_storage)+" food. Build more storage.");
+      s.village.food=amt_storage;
+    }
   }
 }
