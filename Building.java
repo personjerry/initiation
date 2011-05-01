@@ -18,13 +18,27 @@ public class Building implements Serializable {
     return "wtf";
   }
   public String getMaterialName() {
-    if(type==0) {
-      return "Wood";
-    } else if(type==1) {
-      return "Stone";
-    } else if(type==2) {
-      return "Iron";
+    return getMaterialName(false);
+  }
+  public String getMaterialName(boolean adjective) {
+    if(!adjective) {
+      if(type==0) {
+        return "Wood";
+      } else if(type==1) {
+        return "Stone";
+      } else if(type==2) {
+        return "Iron";
+      }
+      return "ffffuuuu";
+    } else {
+      if(type==0) {
+        return "Wooden";
+      } else if(type==1) {
+        return "Stone";
+      } else if(type==2) {
+        return "Iron";
+      }
+      return "ffffuuuu";
     }
-    return "ffffuuuu";
   }
 }
