@@ -62,7 +62,9 @@ public class Initiation {
           io.out("Shows help for that command.");
         } else if(command[1].equals("tasks") ||command[1].equals("settask") ) {
           io.out("Assigns the task to the person.");
-          io.out("Tasks are nothing, farm, build, rest, and mine.");
+          io.out("Tasks are nothing, farm, build, train, rest, and mine.");
+          io.out("Some commands like build and train take another parameter,");
+          io.out("consult help.txt for more info.");
         } else if(command[1].equals("play")) {
           io.out("A day goes by; your people do their tasks.");
         } else if(command[1].equals("resources")) {
@@ -74,7 +76,7 @@ public class Initiation {
         } else if(command[1].equals("verbose")) {
           io.out("Toggles some text. Check resources to see if it is on.");
         } else if(command[1].equals("exit")) {
-          io.out("Exits; how stupid are you?");
+          io.out("Exits the program.");
         } else {
           io.out("Unknown command, type \'help\' for commands.");
         }
