@@ -48,36 +48,7 @@ public class Initiation {
       String[] command=c.split(" ");
       
       if(command[0].equals("help")) {
-        if(command.length==1) {
-          io.out("Commands:");
-          io.out("settask [person] [task]");
-          io.out("play");
-          io.out("resources");
-          io.out("people");
-          io.out("check [person]");
-          io.out("help [command]");
-          io.out("verbose");
-          io.out("exit");
-        } else if(command[1].equals("help")) {
-          io.out("Shows help for that command.");
-        } else if(command[1].equals("tasks") ||command[1].equals("settask") ) {
-          io.out("Assigns the task to the person.");
-          io.out("Tasks are nothing, farm, build, rest, and mine.");
-        } else if(command[1].equals("play")) {
-          io.out("A day goes by; your people do their tasks.");
-        } else if(command[1].equals("resources")) {
-          io.out("Displays a list of resources you have.");
-        } else if(command[1].equals("people")) {
-          io.out("Displays a list of your people.");
-        } else if(command[1].equals("check")) {
-          io.out("Displays statistics for the person.");
-        } else if(command[1].equals("verbose")) {
-          io.out("Toggles some text. Check resources to see if it is on.");
-        } else if(command[1].equals("exit")) {
-          io.out("Exits; how stupid are you?");
-        } else {
-          io.out("Unknown command, type \'help\' for commands.");
-        }
+        help(command);
       } else if(command[0].equals("exit")) {
         exit=true;
       } else if(command[0].equals("resources")) {
@@ -230,6 +201,49 @@ public class Initiation {
     if(s.village.food>amt_storage) {
       io.out((s.village.food-amt_storage)+" food rotted, leaving you with "+(amt_storage)+" food. Build more storage.");
       s.village.food=amt_storage;
+    }
+  }
+  
+  public void help(String[] command) {
+    if(command.length==1) {
+      io.out("Commands:");
+      io.out("settask [person] [task]");
+      io.out("play");
+      io.out("resources");
+      io.out("people");
+      io.out("check [person]");
+      io.out("help [command]");
+      io.out("verbose");
+      io.out("exit");
+    } else if(command[1].equals("help")) {
+      io.out("Shows help for that command.");
+    } else if(command[1].equals("tasks") ||command[1].equals("settask") ) {
+      io.out("Assigns the task to the person.");
+      io.out("Tasks are:");
+      io.out("nothing");
+      io.out("farm");
+      io.out("rest");
+      io.out("train");
+      io.out("-int (intelligence)");
+      io.out("-str (strength)");
+      io.out("build");
+      io.out("-storage");
+      io.out("-wall");
+      io.out("mine");
+    } else if(command[1].equals("play")) {
+      io.out("A day goes by; your people do their tasks.");
+    } else if(command[1].equals("resources")) {
+      io.out("Displays a list of resources you have.");
+    } else if(command[1].equals("people")) {
+      io.out("Displays a list of your people.");
+    } else if(command[1].equals("check")) {
+      io.out("Displays statistics for the person.");
+    } else if(command[1].equals("verbose")) {
+      io.out("Toggles some text. Check resources to see if it is on.");
+    } else if(command[1].equals("exit")) {
+      io.out("Exits; how stupid are you?");
+    } else {
+      io.out("Unknown command, type \'help\' for commands.");
     }
   }
 }

@@ -10,6 +10,15 @@ public class Task implements Serializable {
   Task(String taskname,String secondary_task) {
     taskname=taskname.toLowerCase();
     secondary_task=secondary_task.toLowerCase();
+    
+    //defaults
+    if(taskname.equals("build")&&secondary_task.equals("")) {
+      secondary_task="storage";
+    }
+    if(taskname.equals("train")&&secondary_task.equals("")) {
+      secondary_task="int";
+    }
+   
     if(isValidTask(taskname,secondary_task)) {
       task=taskname;
       secondary=secondary_task;
@@ -25,10 +34,18 @@ public class Task implements Serializable {
       return "Farming";
     }
     if(task.equals("build")) {
-      return "Building";
+      if(secondary.equals("storage")) {
+        return "Building Storage";
+      } else {
+        return "Building Wall";
+      }
     }
     if(task.equals("train")) {
-      return "Training";
+      if(secondary.equals("int")) {
+        return "Training Intelligence";
+      } else {
+        return "Training Strength";
+      }
     }
     if(task.equals("rest")) {
       return "Resting";

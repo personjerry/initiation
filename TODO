@@ -1,18 +1,29 @@
-////////////////////////
-///Feature roadmap   ///
-////////////////////////
+/////////////////////
+///Feature roadmap///
+/////////////////////
 -Scouting to find almost anything
 -Random events to cause almost anything
 -Different actions to do, notably different plants
 -Climate and weather
--Advanced building features
+-Advanced building features (renovation)
 -Roguelike game switch
+  -Decide how your village operates without you
 
-
-
-
+  
 ////////////////////////
 ///Local version TODO///
 ////////////////////////
+-add renovation
+-add scouting
+-add woodcutting
+-add random events
+-add weather
+-add world map
+  -we might have to change initiation to be an applet for a roguelike to work; good thing interface is flexible
+  
+  
+///////////////
+///Completed///
+///////////////
 -Give the build option a default setting
 -Document the options for build
