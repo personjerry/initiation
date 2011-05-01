@@ -1,0 +1,16 @@
+////////////////////////////////
+Parameters:
+////////////////////////////////
+train->int, str
+build->storage, wall
+
+
+////////////////////////////////
+Mechanics of Initiation:
+////////////////////////////////
+Farming requires both a bit of intelligence and a bit of strength, may yield crops.
+Mining takes a bit of strength, and may yield stone.
+Training may increase attributes.
+Building storage buildings will let you store more food. Requires wood, which is currently not available.
+Building walls will increase your town defenses, but that is currently not useful. Requires wood, which is currently not available.
+Every day, some crops may grow to yield food.
