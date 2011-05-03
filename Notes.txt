@@ -10,3 +10,9 @@ Charles:
 	add more resources?
 	also, decide how skills work and how they affect jobs
 	also, decide on what jobs there are
+
+Jerry:
+	What do you mean by jobs? You mean actions? I'll put more actions and resources to implement in the TODO file.
+	Also I think we might want to use bigger primes for perlin noise, and have a way to test it? Like maybe in the main menu or something, launch a program or w/e that outputs the perlin noise either to an applet directly or at least to a text file to be analyzed and drawn by an applet or w/e.
+	When you say skills do you mean the stats? Or will we have a boolean list of "skills" or "perks" (google fallout perks for details), which makes individuals stand out, but may get messy to code if we have to check it all the time (for example a "fast learner" skill means every training action will have a higher chance to succeed). Furthermore these "skills" would be good to be hidden, and there may be good ones as as well as bad?
+
