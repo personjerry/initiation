@@ -1,6 +1,7 @@
 import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.*;
 
 public class Interface extends JFrame implements ActionListener {
   String next;
@@ -9,37 +10,36 @@ public class Interface extends JFrame implements ActionListener {
   JTextField input_field;
   JTextArea output_area;
   JScrollPane scroll_area;
+  JTextArea data_area;
   public Interface() {
     next="";
     
     //JFrame
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setTitle("Initiation");
+    this.setLayout(new FlowLayout());
     
-    //JPanel
-    /*JPanel panel1=new JPanel();
-    input_field=new JTextField(50);
-    input_field.addActionListener(this);
-    panel1.add(input_field);
-    output_area=new JTextArea(10,50);
-    output_area.setEditable(false);
-    output_area.setLineWrap(true);
-    output_area.setWrapStyleWord(true);
-    scroll_area= new JScrollPane(output_area,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    panel1.add(scroll_area);
-    //panel1.add(scroll);
-    this.add(panel1);*/
+    //Box with input ant output
     Box box1=Box.createVerticalBox();
     output_area=new JTextArea(25,50);
     output_area.setEditable(false);
     output_area.setLineWrap(true);
     output_area.setWrapStyleWord(true);
-    scroll_area= new JScrollPane(output_area,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    scroll_area= new JScrollPane(output_area,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     box1.add(scroll_area);
     input_field=new JTextField(50);
     input_field.addActionListener(this);
     box1.add(input_field);
     this.add(box1);
+    
+    //Panel with extra data
+    JPanel panel1=new JPanel();
+    data_area=new JTextArea(26,20);
+    data_area.setEditable(false);
+    data_area.setLineWrap(true);
+    data_area.setWrapStyleWord(true);
+    panel1.add(data_area);
+    this.add(panel1);
     
     //Pack and Set Visible
     this.pack();
@@ -68,8 +68,18 @@ public class Interface extends JFrame implements ActionListener {
   public String pressEnter() {
     return nextLine();
   }
+  public void clear() {
+    output_area.setText("");
+  }
   public void close() {
     System.exit(0);
+  }
+  //data_area
+  public void appendData(String s) {
+    data_area.append(s+"\n");
+  }
+  public void setData(String s) {
+    data_area.setText(s);
   }
   
   //Event Handling

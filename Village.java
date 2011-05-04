@@ -13,7 +13,7 @@ public class Village implements Serializable {
   Vector<Building> buildings;
   Village(Initiation root) {
     this.root=root;
-    food=20;
+    food=40;
     wood=10;
     stone=0;
     crop=0;
@@ -27,7 +27,9 @@ public class Village implements Serializable {
     
     //initialize buildings vector
     buildings=new Vector<Building>();
-    //you start with two storage buildings of size 1 made of wood
+    //you start with four storage buildings of size 1 made of wood
+    addBuilding(new Building(0,0,1));
+    addBuilding(new Building(0,0,1));
     addBuilding(new Building(0,0,1));
     addBuilding(new Building(0,0,1));
   }

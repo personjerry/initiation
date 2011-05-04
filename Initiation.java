@@ -46,6 +46,23 @@ public class Initiation {
     io.out("//insert storyline here");
     boolean exit=false;
     while(!exit) {
+      //Set Data_Field
+      io.setData("");
+      io.appendData("Resources:");
+      io.appendData("Food: "+s.village.food);
+      io.appendData("Wood: "+s.village.wood);
+      io.appendData("Stone: "+s.village.stone);
+      io.appendData("Crop: "+s.village.crop);
+      io.appendData("Buildings:");
+      io.appendData("-Storage: "+s.village.countBuildings(0));
+      io.appendData("-Walls: "+s.village.countBuildings(1)+"\n");
+      io.appendData("People:");
+      for(int i=0;i<s.village.getPop();i++) {
+        io.appendData("-"+s.village.getPerson(i).name);
+      }
+      
+      //End Set Data_Field
+      
       String c=io.nextLine();
       c=c.toLowerCase();
       String[] command=c.split(" ");
@@ -125,6 +142,18 @@ public class Initiation {
       } else if(command[0].equals("verbose")) {
         io.out("Verbose is now "+!s.village.verbose);
         s.village.verbose=!s.village.verbose;
+      } else if(command[0].equals("rename")) {
+        if(command.length==3) {
+          //get the person's id
+          int id=s.village.getPersonId(command[1]);
+          if(id!=-1) {
+            s.village.getPerson(id).name=WordGen.fCap(command[2]);
+          } else {
+            io.out("Please enter a valid name.");
+          }
+        } else {
+          io.out("Please use the form: rename [person] [newname]");
+        }
       } else {
         io.out("Unknown command, type \'help\' for commands.");
       }
@@ -216,6 +245,7 @@ public class Initiation {
       io.out("resources");
       io.out("people");
       io.out("check [person]");
+      io.out("rename [person] [newname]");
       io.out("help [command]");
       io.out("verbose");
       io.out("exit");
