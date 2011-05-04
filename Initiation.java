@@ -20,6 +20,9 @@ public class Initiation {
   Initiation() {
     io=new Interface();
     rand=new MT();
+    run();
+  }
+  void run() {
     while(true){
       io.out("Would you like to create a new file, or load one? (new/load)");
       String user_input=io.nextLine();
@@ -127,6 +130,7 @@ public class Initiation {
       }
     }
     save("save.dat");
+    io.close();
   }
   void create() {
     s=new SaveFile(this);

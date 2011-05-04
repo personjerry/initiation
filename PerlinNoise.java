@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.*;
+
 public class PerlinNoise {
   public int octaves;
   public double persistance;
@@ -9,20 +12,24 @@ public class PerlinNoise {
   static final int OCTAVE_NOISE_GEN = 3463; //random prime
   static final int SEED_NOISE_GEN = 13397; //random prime (orig. 1013)
   
-  public static void main(String[] args) {
-    PerlinNoise p=new PerlinNoise(10,.4,"molly".hashCode());
-    double zoom=0.25; //lower, the more zoomed in; .5 seems good
-    for(double i=0;i<20*zoom;i+=zoom) {
-      for(double j=0;j<50*zoom;j+=zoom) {
-        double pn=p.perlin_noise(i,j);
-        if(pn>0) {
-          System.out.print("#");
+  public static void main(String[] args) throws IOException {
+    PerlinNoise p=new PerlinNoise(20,.4,"charles".hashCode());
+    PrintStream out=new PrintStream(new FileOutputStream("fractal.txt"));
+    double zoom=0.0025; //lower, the more zoomed in; .5 seems good
+    for(double i=0;i<1024*zoom;i+=zoom) {
+      for(double j=0;j<1024*zoom;j+=zoom) {
+        int pn=(int)Math.floor((p.perlin_noise(i,j)+1.0)*5);
+        if(pn<0) pn=0;
+        if(pn>9) pn=9;
+        out.print(pn);
+        /*if(pn>0) {
+          out.print("#");
         } else {
-          System.out.print(".");
-        }
+          out.print(".");
+        }*/
         //System.out.println(p.perlin_noise(i,j));
       }
-      System.out.println();
+      out.println();
     }
     //System.out.println("out:"+p.perlin_noise(0,0));
   }
