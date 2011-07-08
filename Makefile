@@ -15,10 +15,10 @@ main:$(OBJS)
 	@javac $(OBJS) $(LFLAGS)
 	@echo -n " Done\n"
 	@echo -n "Creating manifest..."
-	@echo -n "Main-Class: Initiation" > manifest.txt
+	@echo -n "Main-Class: Initiation\n" > Manifest.txt
 	@echo -n " Done\n"
 	@echo -n "Linking..."
-	@jar cvfm Initiation.jar manifest.txt *.class
+	@jar cvfm Initiation.jar Manifest.txt *.class
 	@echo -n " Done\n"
 
 clean:

@@ -47,6 +47,9 @@ public class Task implements Serializable {
         return "Training Strength";
       }
     }
+    if(task.equals("hunt")){
+      return "Hunting";
+    }
     if(task.equals("rest")) {
       return "Resting";
     }
@@ -64,6 +67,7 @@ public class Task implements Serializable {
        taskname.equals("farm")||
        taskname.equals("rest")||
        taskname.equals("mine")||
+       taskname.equals("hunt")||
        taskname.equals("scout")) {
       return true;
     } else if((taskname.equals("build")&&(secondaryname.equals("wall")||secondaryname.equals("storage")))||
@@ -78,7 +82,7 @@ public class Task implements Serializable {
     boolean ableToWork=true; //no debilitating conditions yet
     if(ableToWork) {
       if(task.equals("farm")) {
-        int crop=(doer.attr_int-doer.root.rand.random()%10>3)?(doer.attr_str-doer.root.rand.random()%10+2):0; //this is complicated; make it make sense please
+        int crop=(doer.attr_int-doer.root.rand.random()%10>3)?(doer.attr_int-doer.root.rand.random()%10+2):0; //this is complicated; make it make sense please
         if(crop>0) { //success?
           if(crop>1) {
             doer.root.io.out(doer.name+" farmed, growing "+crop+" crops.");
@@ -88,6 +92,70 @@ public class Task implements Serializable {
           doer.root.s.village.crop+=crop;
         } else {
           doer.root.io.out(doer.name+" farmed, but couldn't grow any crops.");
+        }
+      }
+      if(task.equals("hunt")) {
+        if(doer.attr_int-doer.root.rand.random()%10>4)
+        {
+          int animalsize = 1+doer.root.rand.random()% (2*doer.root.s.village.people.size());
+          if (doer.attr_str >= animalsize) //caught animal
+          {
+            int temp = doer.root.rand.random()%100;
+            double modifier = (temp-50) / 100.0;
+            String desc = "";
+            if(modifier < -0.3)
+            {
+              desc = "tiny";
+            }
+            else if (modifier < -0.1)
+            {
+              desc = "small";
+            }
+            else if (modifier < 0.1)
+            {
+              desc = "average";
+            }
+            else if (modifier < 0.3)
+            {
+              desc = "large";
+            }
+            else
+            {
+              desc = "huge";
+            }
+            
+            String animal = "";
+            if(animalsize <2)
+            {
+              animal = "rodent";
+            }
+            else if (animalsize < 5)
+            {
+              animal = "rabbit";
+            }
+            else if (animalsize < 10)
+            {
+              animal = "deer";
+            }
+            else if (animalsize < 40)
+            {
+              animal = "wolf";
+            }
+            else
+            {
+              animal = "bear";
+            }            
+            doer.root.io.out(doer.name+" caught a " + desc + " size " + animal+"!");
+            doer.root.io.out("This will provide "+ (int)Math.ceil((modifier+1)*animalsize)+ " food for the village.");
+            doer.root.s.village.food+=Math.ceil((modifier+1)*animalsize);           
+          } else {
+            int dmg = doer.root.rand.random() % (animalsize - doer.attr_str);
+            doer.root.io.out(doer.name+" caught an animal but it was too strong for "+doer.name+" to handle.");
+            doer.root.io.out(doer.name+" subsequently loses "+dmg+" strength!");
+            doer.attr_str -= dmg;
+          }
+        } else {
+          doer.root.io.out(doer.name+" failed to catch any animals.");
         }
       }
       if(task.equals("mine")) {
